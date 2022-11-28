@@ -24,10 +24,16 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product getProductById(Integer productId) {
+//      MySQL
+        String _sql = "Select product_id, product_name, category, image_url, price, stock, description, " +
+                "created_date, last_modified_date " +
+                "From Product where product_id = :productId";
+//      SQL Server
+/*
         String _sql = "Select product_id, product_name, category, image_url, price, stock, description, " +
                 "created_date, last_modified_date " +
                 "From Product with(nolock) where product_id = :productId";
-
+*/
         Map<String, Object> _map = new HashMap<String, Object>();
         _map.put("productId", productId);
 
@@ -65,5 +71,26 @@ public class ProductDaoImpl implements ProductDao {
         int _productId = keyHolder.getKey().intValue();
 
         return _productId;
+    }
+
+    @Override
+    public void updateProduct(Integer productId, ProductRequest productRequest) {
+        String _sql = "Update product set product_name=:productName, category=:category, image_url=:imageUrl, price=:price, stock=:stock, description=:description, " +
+                "last_modified_date=:lastModifiedDate " +
+                "Where product_id=:productId ";
+
+        Map<String, Object> _map = new HashMap<String, Object>();
+        _map.put("productId", productId);
+
+        _map.put("productName", productRequest.getProductName());
+        _map.put("category", productRequest.getCategory().toString());
+        _map.put("imageUrl", productRequest.getImageUrl());
+        _map.put("price", productRequest.getPrice());
+        _map.put("stock", productRequest.getStock());
+        _map.put("description", productRequest.getDescription());
+
+        _map.put("lastModifiedDate", new Date());
+
+        namedParameterJdbcTemplate.update(_sql, new MapSqlParameterSource(_map));
     }
 }
