@@ -2,6 +2,7 @@ package com.leohou.springbootmall.controller;
 
 import com.leohou.springbootmall.model.Product;
 import com.leohou.springbootmall.service.ProductService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,5 +52,12 @@ public class ProductController {
         product = productService.getProductById(productId);
 
         return ResponseEntity.status(HttpStatus.OK).body(product);
+    }
+
+    @DeleteMapping("products/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer productId){
+        productService.deleteProduct(productId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
