@@ -1,5 +1,6 @@
 package com.leohou.springbootmall.controller;
 
+import com.leohou.springbootmall.constant.ProductCategory;
 import com.leohou.springbootmall.model.Product;
 import com.leohou.springbootmall.service.ProductService;
 import org.apache.coyote.Response;
@@ -18,8 +19,11 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(){
-        List<Product> productList = productService.getProducts();
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search
+    ){
+        List<Product> productList = productService.getProducts(category, search);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
