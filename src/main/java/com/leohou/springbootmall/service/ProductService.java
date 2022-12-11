@@ -1,14 +1,14 @@
 package com.leohou.springbootmall.service;
 
-import com.leohou.springbootmall.constant.ProductCategory;
 import com.leohou.springbootmall.controller.ProductRequest;
+import com.leohou.springbootmall.dto.ProductQueryParams;
 import com.leohou.springbootmall.model.Product;
 
 import java.util.List;
 
 public interface ProductService {
 
-	List<Product> getProducts(ProductCategory category, String search);
+	List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 

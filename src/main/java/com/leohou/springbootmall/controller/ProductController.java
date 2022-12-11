@@ -1,6 +1,7 @@
 package com.leohou.springbootmall.controller;
 
 import com.leohou.springbootmall.constant.ProductCategory;
+import com.leohou.springbootmall.dto.ProductQueryParams;
 import com.leohou.springbootmall.model.Product;
 import com.leohou.springbootmall.service.ProductService;
 import org.apache.coyote.Response;
@@ -23,7 +24,11 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ){
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
