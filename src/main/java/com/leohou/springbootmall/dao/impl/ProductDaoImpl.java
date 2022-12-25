@@ -53,7 +53,11 @@ public class ProductDaoImpl implements ProductDao {
 		_sql += " Order By " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
 
 //		分頁
-		_sql += " OFFSET :offset ROWS FETCH NEXT :limit ROWS ONLY";
+//		MySQL
+		_sql += " Limit :limit OFFSET :offset ";
+//		SQL Server
+//		_sql += " OFFSET :offset ROWS FETCH NEXT :limit ROWS ONLY";
+
 		_map.put("offset", productQueryParams.getOffset());
 		_map.put("limit", productQueryParams.getLimit());
 
@@ -144,5 +148,27 @@ public class ProductDaoImpl implements ProductDao {
 		_map.put("productId", productId);
 
 		namedParameterJdbcTemplate.update(_sql, new MapSqlParameterSource(_map));
+	}
+
+	@Override
+	public Integer countProduct(ProductQueryParams productQueryParams) {
+		String _sql = "Select count(*) total " +
+				"From Product Where 1=1";
+
+		Map<String, Object> _map = new HashMap<String, Object>();
+
+//		查詢條件
+		if (null != productQueryParams.getCategory()) {
+			_sql += " and category=:category";
+			_map.put("category", productQueryParams.getCategory().name());
+		}
+		if (null != productQueryParams.getSearch()) {
+			_sql += " and product_name like :search";
+			_map.put("search", "%" + productQueryParams.getSearch() + "%");
+		}
+
+		Integer total = namedParameterJdbcTemplate.queryForObject(_sql, _map, Integer.class);
+
+		return total;
 	}
 }
