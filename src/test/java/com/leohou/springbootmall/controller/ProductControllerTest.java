@@ -2,6 +2,7 @@ package com.leohou.springbootmall.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leohou.springbootmall.constant.ProductCategory;
+import com.leohou.springbootmall.dto.ProductRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

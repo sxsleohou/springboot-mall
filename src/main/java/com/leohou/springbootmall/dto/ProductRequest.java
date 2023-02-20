@@ -1,4 +1,4 @@
-package com.leohou.springbootmall.controller;
+package com.leohou.springbootmall.dto;
 
 import com.leohou.springbootmall.constant.ProductCategory;
 

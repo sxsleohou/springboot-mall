@@ -2,10 +2,10 @@ package com.leohou.springbootmall.controller;
 
 import com.leohou.springbootmall.constant.ProductCategory;
 import com.leohou.springbootmall.dto.ProductQueryParams;
+import com.leohou.springbootmall.dto.ProductRequest;
 import com.leohou.springbootmall.model.Product;
 import com.leohou.springbootmall.service.ProductService;
 import com.leohou.springbootmall.util.Page;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

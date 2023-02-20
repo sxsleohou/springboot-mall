@@ -1,6 +1,6 @@
 package com.leohou.springbootmall.service;
 
-import com.leohou.springbootmall.controller.ProductRequest;
+import com.leohou.springbootmall.dto.ProductRequest;
 import com.leohou.springbootmall.dto.ProductQueryParams;
 import com.leohou.springbootmall.model.Product;
 
