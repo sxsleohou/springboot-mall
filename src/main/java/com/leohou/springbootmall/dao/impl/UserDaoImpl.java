@@ -23,6 +23,40 @@ public class UserDaoImpl implements UserDao {
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Override
+	public User getUserById(Integer userId) {
+		String _sql = "Select user_id, email, password, created_date, last_modified_date " +
+				"From User where user_id = :userId";
+
+		Map<String, Object> _map = new HashMap<String, Object>();
+		_map.put("userId", userId);
+
+		List<User> userList = namedParameterJdbcTemplate.query(_sql, _map, new UserRowMapper());
+
+		if (userList.size() > 0) {
+			return userList.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		String _sql = "Select user_id, email, password, created_date, last_modified_date " +
+				"From User where email = :email";
+
+		Map<String, Object> _map = new HashMap<String, Object>();
+		_map.put("email", email);
+
+		List<User> userList = namedParameterJdbcTemplate.query(_sql, _map, new UserRowMapper());
+
+		if (userList.size() > 0) {
+			return userList.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
 	public Integer createUser(UserRegisterRequest userRegisterRequest) {
 		String _sql = "Insert Into User(email, password, created_date, last_modified_date) " +
 				"Values (:email, :password, :createdDate, :lastModifiedDate) ";
@@ -41,22 +75,5 @@ public class UserDaoImpl implements UserDao {
 		int _userId = keyHolder.getKey().intValue();
 
 		return _userId;
-	}
-
-	@Override
-	public User getUserById(Integer userId) {
-		String _sql = "Select user_id, email, password, created_date, last_modified_date " +
-				"From User where user_id = :userId";
-
-		Map<String, Object> _map = new HashMap<String, Object>();
-		_map.put("userId", userId);
-
-		List<User> userList = namedParameterJdbcTemplate.query(_sql, _map, new UserRowMapper());
-
-		if (userList.size() > 0) {
-			return userList.get(0);
-		} else {
-			return null;
-		}
 	}
 }
