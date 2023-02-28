@@ -22,9 +22,13 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Integer createOrder(Integer userId, int totalAmount) {
-
-		String _sql = "Insert Into [order](user_id, total_amount, created_Date, last_modified_date) " +
+//		MySQL
+		String _sql = "Insert Into `order`(user_id, total_amount, created_Date, last_modified_date) " +
 				"Values (:userId, :totalAmount, :createdDate, :lastModifiedDate) ";
+
+//      SQL Server
+//		String _sql = "Insert Into [order](user_id, total_amount, created_Date, last_modified_date) " +
+//				"Values (:userId, :totalAmount, :createdDate, :lastModifiedDate) ";
 
 		Map<String, Object> _map = new HashMap<String, Object>();
 		_map.put("userId", userId);

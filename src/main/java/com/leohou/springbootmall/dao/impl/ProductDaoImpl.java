@@ -64,15 +64,14 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public Product getProductById(Integer productId) {
 //      MySQL
-		/*
 		String _sql = "Select product_id, product_name, category, image_url, price, stock, description, " +
 				"created_date, last_modified_date " +
 				"From Product where product_id = :productId";
-		*/
+
 //      SQL Server
-		String _sql = "Select product_id, product_name, category, image_url, price, stock, description, " +
-				"created_date, last_modified_date " +
-				"From Product with(nolock) where product_id = :productId";
+//		String _sql = "Select product_id, product_name, category, image_url, price, stock, description, " +
+//				"created_date, last_modified_date " +
+//				"From Product with(nolock) where product_id = :productId";
 
 		Map<String, Object> _map = new HashMap<String, Object>();
 		_map.put("productId", productId);
