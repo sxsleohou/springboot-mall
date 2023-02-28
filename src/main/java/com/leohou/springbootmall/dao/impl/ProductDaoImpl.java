@@ -1,8 +1,8 @@
 package com.leohou.springbootmall.dao.impl;
 
-import com.leohou.springbootmall.dto.ProductRequest;
 import com.leohou.springbootmall.dao.ProductDao;
 import com.leohou.springbootmall.dto.ProductQueryParams;
+import com.leohou.springbootmall.dto.ProductRequest;
 import com.leohou.springbootmall.model.Product;
 import com.leohou.springbootmall.rowmapper.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,6 +135,20 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
+	public void updateStock(Integer productId, Integer stock) {
+		String _sql = "Update product set stock=:stock, last_modified_date=:lastModifiedDate " +
+				"Where product_id=:productId ";
+
+		Map<String, Object> _map = new HashMap<String, Object>();
+		_map.put("productId", productId);
+
+		_map.put("stock", stock);
+		_map.put("lastModifiedDate", new Date());
+
+		namedParameterJdbcTemplate.update(_sql, new MapSqlParameterSource(_map));
+	}
+
+	@Override
 	public void deleteProduct(Integer productId) {
 		String _sql = "Delete From product Where product_id=:productId ";
 
@@ -170,4 +184,5 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		return sql;
 	}
+
 }
