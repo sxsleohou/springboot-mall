@@ -26,16 +26,15 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<Product> getProducts(ProductQueryParams productQueryParams) {
 //      MySQL
-		/*
 		String _sql = "Select product_id, product_name, category, image_url, price, stock, description, " +
 				"created_date, last_modified_date " +
 				"From Product Where 1=1";
-		*/
+
 //		SQL Server
 
-		String _sql = "Select product_id, product_name, category, image_url, price, stock, description, " +
-				"created_date, last_modified_date " +
-				"From Product with(nolock) Where 1=1";
+//		String _sql = "Select product_id, product_name, category, image_url, price, stock, description, " +
+//				"created_date, last_modified_date " +
+//				"From Product with(nolock) Where 1=1";
 
 
 		Map<String, Object> _map = new HashMap<String, Object>();
